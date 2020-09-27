@@ -2,7 +2,6 @@ import requests
 from sys import argv
 import os
 from multiprocessing import Pool
-import time
 from blessings import Terminal
 
 

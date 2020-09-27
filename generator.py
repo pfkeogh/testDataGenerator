@@ -27,8 +27,6 @@ def main():
         print(f"Created {size} test events stored in {filename}")
 
 
-
-
 def event_gen() -> str:
     event_types = ["track", "page", "identify"]
     random_type = event_types[random.randrange(2)]
