@@ -3,7 +3,9 @@ import json
 from sys import argv
 from postman.request import RequestTemplate
 from multiprocessing import Pool
-from progressbars import ProgressBars
+from functools import partial
+import requests
+
 
 
 # pass the postman filename and number of requests to make
@@ -15,18 +17,16 @@ def main():
 
 
 def multiprocess_runner(request_templates, number_of_requests):
-    with Pool(len(request_templates)) as pool:
-        pool.map(request_sender, request_templates, number_of_requests)
+    pool = Pool(len(request_templates))
+    request_send = partial(request_sender, number_of_requests=number_of_requests)
+    pool.map(request_send, request_templates)
 
 
-def request_sender(request_template, number_of_requests):
-    progress_bars = ProgressBars()
-    pid = f"process:{os.getpid()}"
-    progress_bars.add_task(pid)
-    for i in range(0, number_of_requests):
-        progress_bars.increment_task(pid, 1)
-        # requests.post(url, json=line, headers=headers)
-    print('thread ran')
+def request_sender(request_template: RequestTemplate, number_of_requests):
+    pid = f"process:{os.getpid()} request: {request_template.name} method: {request_template.method}"
+    for i in range(0, int(number_of_requests)):
+        requests.post(request_template.url, data=request_template.data, headers=request_template.headers)
+    print(f'{pid} complete')
 
 
 def request_builder(postman_json):

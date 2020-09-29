@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "95989210-590c-464e-a197-3db9ff7c5be4",
+		"name": "segmentcom - load test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "intake - event indentify",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "x NTU4OWI5N2M1MTlmYmZhOTNhYmE4MjFhMWI4MzM1OTk0ODg3NTAwZTc3ZGVjM2QxNjg3ZGIwMDViNTQxMzg4MTljMTUwMDMyOmh0dHBzOi8vc2FsZXNmb3JjZS1xYS5zdGFnaW5nLmFwaS11czEuY29t"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"traits\": {\n        \"firstName\": \"{{$randomFirstName}}\",\n        \"lastName\": \"{{$randomLastName}}\",\n        \"TEST_HIDDEN_FIELD\": \"test2\",\n        \"lists\": [\n            {\n                \"id\": 2,\n                \"status\": \"active\"\n            }\n        ],\n        \"tagsReset\": 1,\n        \"tags\": [\n            \"tag_name\"\n        ]\n    },\n    \"type\": \"identify\",\n    \"anonymous_id\": \"anonId\",\n    \"user_id\": \"identifyevent@test.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://strategic-integrations-segment-intake-staging.cluster.staging.app-us1.com/api/v1/intake",
+					"protocol": "https",
+					"host": [
+						"strategic-integrations-segment-intake-staging",
+						"cluster",
+						"staging",
+						"app-us1",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"intake"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "intake - event track",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "x NTU4OWI5N2M1MTlmYmZhOTNhYmE4MjFhMWI4MzM1OTk0ODg3NTAwZTc3ZGVjM2QxNjg3ZGIwMDViNTQxMzg4MTljMTUwMDMyOmh0dHBzOi8vc2FsZXNmb3JjZS1xYS5zdGFnaW5nLmFwaS11czEuY29t",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"event\": \"postman_event_name\",\n    \"properties\": {\n        \"ac_value\": \"postman_event_data\"\n    },\n    \"type\": \"track\",\n    \"user_id\": \"trackevent@test.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://strategic-integrations-segment-intake-staging.cluster.staging.app-us1.com/api/v1/intake",
+					"protocol": "https",
+					"host": [
+						"strategic-integrations-segment-intake-staging",
+						"cluster",
+						"staging",
+						"app-us1",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"intake"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "intake - event page",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "x NTU4OWI5N2M1MTlmYmZhOTNhYmE4MjFhMWI4MzM1OTk0ODg3NTAwZTc3ZGVjM2QxNjg3ZGIwMDViNTQxMzg4MTljMTUwMDMyOmh0dHBzOi8vc2FsZXNmb3JjZS1xYS5zdGFnaW5nLmFwaS11czEuY29t"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"context\": {\n      \"page\": {\n          \"referrer\": \"ref_val\",\n          \"url\": \"http://whitelistme.com\"\n      }\n  },\n  \"name\": \"page_name_or_title\",\n  \"type\": \"page\",\n  \"anonymous_id\": \"anonId_or_email\",\n  \"user_id\": \"pageevent@test.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://strategic-integrations-segment-intake-staging.cluster.staging.app-us1.com/api/v1/intake",
+					"protocol": "https",
+					"host": [
+						"strategic-integrations-segment-intake-staging",
+						"cluster",
+						"staging",
+						"app-us1",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"intake"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
